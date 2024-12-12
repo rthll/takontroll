@@ -13,6 +13,12 @@ header button {
 ol {
     list-style: none;
     padding: 0;
+    margin-top: 5px;
+}
+
+button.solid {
+    margin-top: 6px;
+    margin-right: 6px;
 }
 
 ol li {

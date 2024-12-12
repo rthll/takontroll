@@ -15,6 +15,19 @@ input,button {
     padding: 10px;
     width: -webkit-fill-available;
 }
+.lab {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.lab.fixed {
+    position: fixed;
+}
+
+.lab.top {
+    top: 10px;
+    left: 15px;
+}
 
 button.fab {
     width: 54px;
