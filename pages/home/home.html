@@ -12,6 +12,7 @@
     <script src="../../firebase-init.js"></script>
     <script src="home.js"></script>
     <script src="../../auth-guard.js" ></script>
+    <script src="../../loading.js"></script>
 </head>
 <body>
     <header>
@@ -20,7 +21,7 @@
     <ol id="transactions">
         
     </ol>
-    <button class="fab fixed bottom right">+</button>
+    <button  onclick="newTransaction()" class="fab fixed bottom right">+</button>
     <label id="user" class="lab fixed top"></label>
 </body>
 </html>

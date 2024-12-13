@@ -2,23 +2,10 @@ body {
     height: 100vh;
 }
 
-header {
-    text-align: right;
-}
-
-header button {
-    width: auto;
-}
-
 ol {
     list-style: none;
     padding: 0;
     margin-top: 5px;
-}
-
-button.solid {
-    margin-top: 6px;
-    margin-right: 6px;
 }
 
 ol li {

@@ -2,21 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
     showUser();
 })
 
-function logout() {
-    firebase.auth().signOut().then(() => {
-        window.location.href = "../../index.html"
-    }).catch("Erro ao fazer logout!");
-}
-
 function showUser() {
     const userDisplayLabel = document.getElementById("user");
 
-    firebase.auth().onAuthStateChanged((user) =>{
+    firebase.auth().onAuthStateChanged(user =>{
         if(user) {
             const displayName = user.email;
             userDisplayLabel.textContent = `Conectado como: ${displayName}`;
         } else {
-            userDisplayLabel.textContent = "Nenhum usuário conectado!";
+            userDisplayLabel.textContent = "Erro!";
         }
     })
 
@@ -29,13 +23,21 @@ firebase.auth().onAuthStateChanged(user => {
 })
 
 function findTransactions(user) {
+    showLoading();
     firebase.firestore()
     .collection('transactions')
     .where('user.uid','==', user.uid)
+    .orderBy('date', 'desc')
     .get()
     .then(snapshot => {
+        hideLoading();
         const transactions = snapshot.docs.map(doc => doc.data());
         addTransactionsToScreen(transactions);
+    })
+    .catch(err => {
+        hideLoading();
+        console.log(err);
+        alert('Erro ao recuperar transações!');
     })
 }
 
@@ -66,6 +68,10 @@ function addTransactionsToScreen(transactions) {
         orderedList.appendChild(li);
 
     });
+}
+
+function newTransaction() {
+    window.location.href = "../transaction/transaction.html";
 }
 
 function formatMoney(money) {

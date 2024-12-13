@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Takontroll</title>
+    <link rel="stylesheet" href="transaction.css">
+    <link rel="stylesheet" href="../../global.css">
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore-compat.js"></script>
+    <script src="../../firebase-init.js"></script>
+    <script src="transaction.js"></script>
+    <script src="../../auth-guard.js"></script>
+    <script src="../../loading.js"></script>
+</head>
+
+<body>
+    <header>
+        <button onclick="logout()" type="button" class="solid">Sair</button>
+    </header>
+
+    <main class="centralize">
+        <form action="">
+            <div class="formTransaction">
+                <div><label>Tipo de transação:</label></div>
+                <input type="radio" name="type" id="income">
+                <label for="income">Receita</label>
+                <input type="radio" name="type" id="expense">
+                <label for="expense">Despesa</label>
+            </div>
+            <div class="formTransaction">
+                <div><label>Data:</label></div>
+                <input onchange="validDate()" id="date" type="date" placeholder="date">
+                <div class="error" id="date-error">Selecione uma data!</div>
+            </div>
+            <div class="formTransaction">
+                <div><label>Moeda:</label></div>
+                <select id="currency">
+                    <option selected>Real</option>
+                    <option >Dolar</option>
+                    <option >Euro</option>
+                </select>
+            </div>
+            <div class="formTransaction">
+                <div><label>Valor:</label></div>
+                <input onchange="validValue()" id="value" type="number" placeholder="">
+                <div id="value-error" class="error">Valor não pode ser negativo/nulo</div>
+            </div>
+            <div class="formTransaction">
+                <div><label>Tipo:</label></div>
+                <input onchange="validTransactionType()" id="transactionType" type="text" placeholder="Supermercado, combustível, vestuário...">
+                <div id="transaction-type-error" class="error">O tipo de transação não pode ser nulo!</div>
+            </div>
+            <div class="formTransaction">
+                <div><label>Descrição:</label></div>
+                <input id="description-error" type="text" placeholder="">
+            </div>
+            <div class="buttonFormTransaction">
+                <button class="solid">Salvar</button>
+                <button type="button" onclick="cancelTransaction()" class="clear">Cancelar</button>
+            </div>
+        </form>
+    </main>
+
+    <ol id="transactions">
+
+    </ol>
+</body>
+
+</html>

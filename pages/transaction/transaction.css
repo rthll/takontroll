@@ -1,0 +1,14 @@
+button.solid {
+    margin-top: 6px;
+    margin-right: 6px;
+}
+
+main form{
+    font-weight: bolder;
+    width: 300px;
+    height: 750px;
+}
+
+.formTransaction{
+    margin-bottom: 10px;
+}
