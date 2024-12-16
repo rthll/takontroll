@@ -45,7 +45,7 @@
             </div>
             <div class="formTransaction">
                 <div><label>Valor:</label></div>
-                <input onchange="validValue()" id="value" type="number" placeholder="">
+                <input onchange="validValue()" id="value" type="number">
                 <div id="value-error" class="error">Valor não pode ser negativo/nulo</div>
             </div>
             <div class="formTransaction">
@@ -55,10 +55,10 @@
             </div>
             <div class="formTransaction">
                 <div><label>Descrição:</label></div>
-                <input id="description-error" type="text" placeholder="">
+                <input id="description" type="text">
             </div>
             <div class="buttonFormTransaction">
-                <button class="solid">Salvar</button>
+                <button type="button" onclick="saveTransaction()" class="solid">Salvar</button>
                 <button type="button" onclick="cancelTransaction()" class="clear">Cancelar</button>
             </div>
         </form>

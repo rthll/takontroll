@@ -26,13 +26,48 @@ function validTransactionType() {
     }
 }
 
+function saveTransaction() {
+    let typeExpense = "income";
+    if(form.expense().checked){
+        typeExpense = "expense";
+    }
+
+    const transaction = {
+        type: typeExpense,
+        date: form.date().value,
+        money: {
+            currency: form.currency().value,
+            value: parseFloat(form.value().value)
+        },
+        transactionType: form.transactionType().value,
+        description: form.description().value,
+        user: {
+            uid: firebase.auth().currentUser.uid
+        }
+    }
+
+    firebase.firestore()
+    .collection('transactions')
+    .add(transaction)
+    .then(() => {
+        window.location.href = "../home/home.html";
+
+    })
+    .catch(() =>{
+        alert("Erro ao salvar transação");
+    })
+
+}
+
 
 const form = {
+    transactionType: () => document.getElementById("transactionType"),
     date: () => document.getElementById('date'),
     income: () => document.getElementById('income'),
     expense: () => document.getElementById('expense'),
     dateError: () => document.getElementById('date-error'),
     currency: () => document.getElementById('currency'),
+    value: () => document.getElementById("value"),
     valueError: () => document.getElementById('value-error'),
     transactionTypeError: () => document.getElementById('transaction-type-error'),
     description: () => document.getElementById('description'),
