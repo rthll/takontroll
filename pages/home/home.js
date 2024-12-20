@@ -23,29 +23,49 @@ firebase.auth().onAuthStateChanged(user => {
 })
 
 function findTransactions(user) {
-    showLoading();
     firebase.firestore()
     .collection('transactions')
     .where('user.uid','==', user.uid)
     .orderBy('date', 'desc')
     .get()
     .then(snapshot => {
-        hideLoading();
-        const transactions = snapshot.docs.map(doc => doc.data());
+        const transactions = snapshot.docs.map(doc => ({
+            ...doc.data(),
+            uid: doc.id
+    }));
         addTransactionsToScreen(transactions);
     })
     .catch(err => {
-        hideLoading();
         console.log(err);
         alert('Erro ao recuperar transações!');
     })
 }
 
+function deleteDocument(uid) {
+    showLoading();
+    const db = firebase.firestore();
+    db.collection("transactions").doc(uid).delete()
+        .then(() => {
+            hideLoading();
+            alert("Documento excluído com sucesso!");
+            location.reload(); // Opcional: pode atualizar apenas a lista
+        })
+        .catch((error) => {
+            hideLoading();
+            console.error("Erro ao remover documento: ", error);
+            alert("Erro ao remover documento!");
+        });
+}
+
+  
 function addTransactionsToScreen(transactions) {
     const orderedList = document.getElementById('transactions');
     transactions.forEach(transactions => {
         const li = document.createElement('li');
         li.classList.add(transactions.type);
+        li.addEventListener('click', () => {
+            window.location.href = "../transaction/transaction.html?uid=" + transactionType.uid;
+        })
 
         const date = document.createElement('p');
         date.innerHTML = formatDate(transactions.date);
@@ -65,8 +85,16 @@ function addTransactionsToScreen(transactions) {
             li.appendChild(description);
         }
         
-        orderedList.appendChild(li);
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Excluir';
+        deleteButton.classList.add('delete-btn');
+        deleteButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que outros eventos no item da lista sejam disparados
+            deleteDocument(transactions.uid);
+        });
 
+        li.appendChild(deleteButton); // Adiciona o botão ao item da lista
+        orderedList.appendChild(li);
     });
 }
 
