@@ -41,6 +41,15 @@ p {
     width: 60px;
     height: 30px;
 }
-.delete-btn:hover {
-    background-color: darkred;
+
+/*
+.update-btn {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
 }
+*/

@@ -57,14 +57,14 @@ function deleteDocument(uid) {
         });
 }
 
-  
+
 function addTransactionsToScreen(transactions) {
     const orderedList = document.getElementById('transactions');
     transactions.forEach(transactions => {
         const li = document.createElement('li');
         li.classList.add(transactions.type);
         li.addEventListener('click', () => {
-            window.location.href = "../transaction/transaction.html?uid=" + transactionType.uid;
+            window.location.href = "../transaction/transaction.html?uid=" + transactions.uid;
         })
 
         const date = document.createElement('p');
@@ -89,11 +89,12 @@ function addTransactionsToScreen(transactions) {
         deleteButton.textContent = 'Excluir';
         deleteButton.classList.add('delete-btn');
         deleteButton.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita que outros eventos no item da lista sejam disparados
+            e.stopPropagation(); 
             deleteDocument(transactions.uid);
         });
+        
+        li.appendChild(deleteButton);
 
-        li.appendChild(deleteButton); // Adiciona o botão ao item da lista
         orderedList.appendChild(li);
     });
 }
