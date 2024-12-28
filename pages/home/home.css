@@ -3,9 +3,9 @@ body {
 }
 
 ol {
+    margin-top: 20px;
     list-style: none;
     padding: 0;
-    margin-top: 5px;
 }
 
 ol li {
@@ -13,6 +13,19 @@ ol li {
     background: white;
     padding: 8px 16px;
     border-bottom: 1px solid gray;
+}
+
+.counter {
+    background: white;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 50px;
+}
+
+body main {
+    width: 500px;
 }
 
 ol li:hover {

@@ -15,7 +15,7 @@ header button {
 }
 
 body {
-    background: rgb(45, 211, 111);
+    background: #f0f2f5;
     margin: 0;
 }
 
@@ -26,6 +26,10 @@ input,button, select {
 
 input[type="radio"] {
     width: auto;
+}
+
+button {
+    border-radius: 3px;
 }
 
 .lab {
@@ -43,6 +47,7 @@ input[type="radio"] {
 }
 
 button.fab {
+    background: #2ecc71;
     width: 54px;
     height: 54px;
     border-radius: 50px;
@@ -61,6 +66,12 @@ button.fab.bottom {
 
 button.fab.right {
     right: 32px;
+}
+
+form {
+    border-radius: 8px;
+    background: white;
+    padding: 30px;
 }
 
 .form-field {
@@ -85,20 +96,9 @@ button.fab.right {
     font-size: 24px;
 }
 
-.clear {
-    background: transparent;
-    border: none;
-}
-
 .solid {
-    background: white;
+    background: #2ecc71;
     border: none;
-}
-
-.outline {
-    background: transparent;
-    color: white;
-    border: 1px solid white;
 }
 
 .error {
@@ -106,3 +106,5 @@ button.fab.right {
     background: red;
     display: none;
 }
+
+

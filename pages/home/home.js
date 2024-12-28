@@ -34,12 +34,29 @@ function findTransactions(user) {
             uid: doc.id
     }));
         addTransactionsToScreen(transactions);
+        updateCounter(transactions);
     })
     .catch(err => {
         console.log(err);
         alert('Erro ao recuperar transações!');
     })
 }
+
+function updateCounter(transactions) {
+    const total = transactions.reduce((total, transaction) => {
+        const value = transaction.money.value;
+        if (transaction.type === 'income') {
+            return total + value; 
+        } else if (transaction.type === 'expense') {
+            return total - value; 
+        }
+        return total;
+    }, 0);
+
+    const counterLabel = document.querySelector('.counter label');
+    counterLabel.textContent = `Saldo Total: R$ ${total.toFixed(2)}`;
+}
+
 
 function deleteDocument(uid) {
     showLoading();
@@ -48,7 +65,7 @@ function deleteDocument(uid) {
         .then(() => {
             hideLoading();
             alert("Documento excluído com sucesso!");
-            location.reload(); // Opcional: pode atualizar apenas a lista
+            location.reload(); 
         })
         .catch((error) => {
             hideLoading();
