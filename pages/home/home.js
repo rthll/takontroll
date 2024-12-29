@@ -43,12 +43,22 @@ function findTransactions(user) {
 }
 
 function updateCounter(transactions) {
+    const exchangeRates = {
+        Dolar: 6.2,  
+        Euro: 7.0,   
+        Real: 1.0    
+    };
+
     const total = transactions.reduce((total, transaction) => {
         const value = transaction.money.value;
+        const currency = transaction.money.currency;
+
+        const valueInBRL = value * (exchangeRates[currency] || 1);
+
         if (transaction.type === 'income') {
-            return total + value; 
+            return total + valueInBRL;
         } else if (transaction.type === 'expense') {
-            return total - value; 
+            return total - valueInBRL;
         }
         return total;
     }, 0);
@@ -56,6 +66,7 @@ function updateCounter(transactions) {
     const counterLabel = document.querySelector('.counter label');
     counterLabel.textContent = `Saldo Total: R$ ${total.toFixed(2)}`;
 }
+
 
 
 function deleteDocument(uid) {
