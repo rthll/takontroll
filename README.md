@@ -40,7 +40,7 @@ Firebase Firestore.
 
 Clone este repositório:
 
-git clone https://github.com/seu-usuario/takontroll.git
+git clone https://github.com/rthll/takontroll.git
 cd takontroll
 
 Configure o Firebase:
